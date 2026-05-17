@@ -222,9 +222,26 @@ document.getElementById('viewTitle').innerHTML =
 
   document.getElementById('search').oninput = render;
 
-  document.querySelectorAll('.nav-btn').forEach(b=>{
-    b.onclick = ()=>{ currentView = b.dataset.view; document.getElementById('search').value=''; render(); };
-  });
+//   document.querySelectorAll('.nav-btn').forEach(b=>{
+//     b.onclick = ()=>{ currentView = b.dataset.view; document.getElementById('search').value=''; render(); };
+//   });
+const sidebar = document.querySelector('.sidebar');
+
+document.querySelectorAll('.nav-btn').forEach(b=>{
+
+  b.onclick = ()=>{
+
+    currentView = b.dataset.view;
+
+    document.getElementById('search').value='';
+
+    sidebar.classList.remove('show');
+
+    render();
+
+  };
+
+});
 /* =========================
    MANUAL STATIC LINKS
 ========================= */
@@ -562,5 +579,16 @@ deleteLink = function(cat, id){
    LOAD STATIC LINKS
 ========================= */
 
+// mergeStaticLinks();
+//   render();
 mergeStaticLinks();
-  render();
+
+const menuToggle = document.getElementById('menuToggle');
+
+menuToggle.onclick = ()=>{
+
+  sidebar.classList.toggle('show');
+
+};
+
+render();
