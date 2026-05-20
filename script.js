@@ -443,7 +443,7 @@ const STATIC_LINKS = {
           {
             id: 's13',
             name: 'MyKad',
-            url: 'htt',
+            url: 'https://google.com',
             pinned: false
           }
       ]
@@ -621,3 +621,317 @@ menuToggle.onclick = ()=>{
 };
 
 render();
+
+/* =========================
+   PASSWORD PROTECTION
+========================= */
+
+const WEBSITE_PASSWORD = "Easy@2026"; // Change this to your desired password
+
+const loginScreen =
+  document.getElementById("vanta-bg");
+
+const loginBtn =
+  document.getElementById("loginBtn");
+
+const passwordInput =
+  document.getElementById("passwordInput");
+
+const loginStatus =
+  document.getElementById("loginStatus");
+
+const loginBox =
+  document.getElementById("loginBox");
+
+  document.querySelector(".app")
+  .classList.add("hidden");
+
+/* AUTO LOGIN */
+
+if(localStorage.getItem("dashboard_auth")==="true"){
+
+  document.querySelector(".app")
+    .classList.remove("hidden");
+
+  loginScreen.style.display = "none";
+
+}
+
+
+/* LOGIN BUTTON */
+
+loginBtn.onclick = ()=>{
+
+  loginStatus.style.display = "block";
+
+  loginStatus.className = "";
+
+  loginStatus.innerHTML = `
+  > Initializing secure connection...<br>
+  > Verifying credentials...<br>
+  > Accessing protected gateway...<br>
+  `;
+
+  setTimeout(()=>{
+
+    /* =========================
+       CORRECT PASSWORD
+    ========================= */
+
+    if(passwordInput.value === WEBSITE_PASSWORD){
+
+      loginStatus.classList.add(
+        "status-granted"
+      );
+
+      loginStatus.innerHTML += `
+      > Security clearance verified<br>
+      > ✅ ACCESS GRANTED<br>
+      > Loading dashboard...
+      `;
+
+      localStorage.setItem(
+        "dashboard_auth",
+        "true"
+      );
+
+      loginBox.classList.remove(
+        "animate__shakeX"
+      );
+
+      loginBox.classList.add(
+        "animate__animated",
+        "animate__pulse"
+      );
+
+      setTimeout(()=>{
+
+        loginBox.classList.remove(
+          "animate__animated",
+          "animate__pulse"
+        );
+
+      },900);
+
+
+      setTimeout(()=>{
+
+  document.querySelector(".app")
+    .classList.remove("hidden");
+
+  loginScreen.style.display = "none";
+
+},1200);
+
+    }
+
+
+    /* =========================
+       WRONG PASSWORD
+    ========================= */
+
+    else{
+
+      loginBox.classList.remove(
+        "animate__animated",
+        "animate__shakeX"
+      );
+
+      void loginBox.offsetWidth;
+
+      loginBox.classList.add(
+        "animate__animated",
+        "animate__shakeX"
+      );
+
+      setTimeout(()=>{
+
+        loginBox.classList.remove(
+          "animate__animated",
+          "animate__shakeX"
+        );
+
+      },700);
+
+      loginStatus.classList.add(
+        "status-denied"
+      );
+
+      loginStatus.innerHTML += `
+      > Intrusion attempt detected<br>
+      > ❌ ACCESS DENIED<br>
+      > Unauthorized credentials
+      `;
+
+    }
+
+  },1200);
+
+};
+
+
+/* ENTER KEY SUPPORT */
+
+passwordInput.addEventListener(
+  "keypress",
+  (e)=>{
+
+    if(e.key==="Enter"){
+
+      loginBtn.click();
+
+    }
+
+  }
+);
+
+// window.addEventListener("load", ()=>{
+
+//   particlesJS("particles-js", {
+
+//     particles: {
+
+//       number: {
+//         value: 70
+//       },
+
+//       color: {
+//         value: "#ffffff"
+//       },
+
+//       shape: {
+//         type: "circle"
+//       },
+
+//       opacity: {
+//         value: 0.35
+//       },
+
+//       size: {
+//         value: 3
+//       },
+
+//       line_linked: {
+
+//         enable: true,
+
+//         distance: 150,
+
+//         color: "#ffffff",
+
+//         opacity: 0.25,
+
+//         width: 1
+
+//       },
+
+//       move: {
+
+//         enable: true,
+
+//         speed: 2
+
+//       }
+
+//     },
+
+//     interactivity: {
+
+//       events: {
+
+//         onhover: {
+
+//           enable: true,
+
+//           mode: "grab"
+
+//         }
+
+//       }
+
+//     },
+
+//     retina_detect: true
+
+//   });
+
+// });
+
+// VANTA.BIRDS({
+
+//   el: "#vanta-bg",
+
+//   mouseControls: true,
+
+//   touchControls: true,
+
+//   gyroControls: false,
+
+//   minHeight: 200.00,
+
+//   minWidth: 200.00,
+
+//   scale: 1.00,
+
+//   scaleMobile: 1.00,
+
+//   backgroundColor: 0x5f72ff,
+
+//   color1: 0xffffff,
+
+//   color2: 0xd65db1,
+
+//   quantity: 4,
+
+//   birdSize: 1.2,
+
+//   wingSpan: 28,
+
+//   speedLimit: 4,
+
+//   separation: 40,
+
+//   alignment: 30,
+
+//   cohesion: 35
+
+// });
+VANTA.BIRDS({
+
+  el: "#vanta-bg",
+
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: false,
+
+  minHeight: 200.00,
+  minWidth: 200.00,
+
+  scale: 1.00,
+  scaleMobile: 1.00,
+
+  backgroundColor: 0x07192f,
+
+  backgroundAlpha: 1,
+
+  color1: 0xff6bd6,
+
+  color2: 0xffc371,
+
+  colorMode: "varianceGradient",
+
+  quantity: 5,
+
+  birdSize: 1,
+
+  wingSpan: 30,
+
+  speedLimit: 5,
+
+  separation: 20,
+
+  alignment: 20,
+
+  cohesion: 20
+
+});

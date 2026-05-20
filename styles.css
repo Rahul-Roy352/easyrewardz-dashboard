@@ -15,24 +15,33 @@
     min-height:100vh;
     display:flex;
   } */
-   body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
 
-  background:#0b0b0b;
+  background:
+  linear-gradient(
+    135deg,
+    #5f72ff 0%,
+    #7b4dff 45%,
+    #d65db1 100%
+  );
 
-  color: var(--text);
+  color:var(--text);
 
   min-height:100vh;
 
   padding:10px;
+
+  overflow:hidden;
 }
 
   .app{
+
   width:100%;
 
   max-width:1800px;
 
-  min-height:95vh;
+  height:calc(100vh - 20px);
 
   display:flex;
 
@@ -54,6 +63,16 @@
   box-shadow:
     0 20px 60px rgba(0,0,0,0.45);
 }
+
+.app.hidden{
+  display:none;
+}
+
+/* .app.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+} */
 
   /* Sidebar */
   .sidebar {
@@ -327,12 +346,12 @@
 
   .empty { opacity:0.6; padding:14px; font-style:italic; }
 
-  /* .footer {
-    margin-top:40px; padding:18px; text-align:center;
-    color:var(--muted); font-size:13px;
-    border-top:1px solid var(--border);
-  } */
-   .footer{
+  
+   /* .footer{
+  margin-top:auto;
+
+  padding:22px 10px 10px; */
+  .footer{
   margin-top:auto;
 
   padding:22px 10px 10px;
@@ -534,3 +553,335 @@
 }
   ::-webkit-scrollbar { width:8px; }
   ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius:4px; }
+
+  /* =========================
+   LOGIN SCREEN
+========================= */
+
+
+.login-screen{
+
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+  linear-gradient(
+    135deg,
+    #5f72ff 0%,
+    #7b4dff 45%,
+    #d65db1 100%
+  );
+
+}
+
+#vanta-bg{
+  width:100%;
+  height:100vh;
+}
+
+.login-box{
+  width:90%;
+
+  max-width:420px;
+
+  padding:40px 30px;
+
+  border-radius:30px;
+
+  background:
+  rgba(255,255,255,0.14);
+
+  backdrop-filter:blur(24px);
+
+  border:
+  1px solid rgba(255,255,255,0.12);
+
+  text-align:center;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.3);
+}
+
+.login-box h1{
+  font-size:32px;
+
+  margin-bottom:10px;
+}
+
+.login-box p{
+  opacity:0.8;
+
+  margin-bottom:24px;
+}
+
+.login-box input{
+  width:100%;
+
+  padding:14px 16px;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:
+  rgba(255,255,255,0.14);
+
+  color:white;
+
+  font-size:16px;
+
+  margin-bottom:18px;
+
+  outline:none;
+
+  transition:0.25s;
+}
+
+.login-box input:focus{
+
+  border:
+  1px solid rgba(255,255,255,0.22);
+
+  box-shadow:
+    0 0 18px rgba(255,255,255,0.18);
+
+  background:
+  rgba(255,255,255,0.18);
+}
+
+.login-box input::placeholder{
+  color:rgba(255,255,255,0.65);
+}
+
+.login-box button{
+  width:100%;
+
+  padding:14px;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:white;
+
+  color:#5f72ff;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:0.25s;
+}
+
+.login-box button:hover{
+  transform:translateY(-2px);
+}
+
+#loginError{
+  margin-top:14px;
+
+  color:#ffd6d6;
+
+  display:none;
+
+  font-size:14px;
+}
+
+/* =========================
+   TERMINAL STATUS
+========================= */
+
+#loginStatus{
+  margin-top:18px;
+
+  min-height:90px;
+
+  border-radius:18px;
+
+  background:
+  rgba(0,0,0,0.28);
+
+  padding:14px;
+
+  text-align:left;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+  font-family:
+  Consolas,
+  monospace;
+
+  color:#00ff88;
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  display:none;
+
+  overflow:hidden;
+}
+
+#loginStatus{
+  animation:terminalFade 0.4s ease;
+}
+
+
+/* =========================
+   GLOW EFFECTS
+========================= */
+
+.status-granted{
+  color:#00ff9d;
+
+  box-shadow:
+    0 0 20px rgba(0,255,157,0.22);
+
+  border:
+  1px solid rgba(0,255,157,0.25);
+}
+
+.status-denied{
+  color:#ff7272;
+
+  box-shadow:
+    0 0 20px rgba(255,114,114,0.22);
+
+  border:
+  1px solid rgba(255,114,114,0.25);
+}
+
+
+/* =========================
+   BUTTON EFFECT
+========================= */
+
+.login-box button{
+  position:relative;
+
+  overflow:hidden;
+}
+
+.login-box button:hover{
+
+  transform:
+  translateY(-2px)
+  scale(1.02);
+
+  box-shadow:
+    0 10px 30px rgba(255,255,255,0.28);
+}
+
+
+/* =========================
+   LOGIN BOX GLOW
+========================= */
+
+.login-box{
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.28),
+    0 0 40px rgba(255,255,255,0.08);
+
+  animation:
+  floatBox 5s ease-in-out infinite;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes floatBox{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
+}
+
+
+@keyframes terminalFade{
+
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.status-denied{
+  color:#ff7b7b !important;
+}
+
+.status-granted{
+  color:#00ff88 !important;
+}
+
+/* =========================
+   PARTICLES BACKGROUND
+========================= */
+
+#loginScreen{
+  position:relative;
+
+  overflow:hidden;
+}
+
+
+/* #particles-js{
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  z-index: 1;
+
+} */
+
+/* .login-box{
+  position:relative;
+
+  z-index:2;
+} */
+
+.login-box{
+
+  position: relative;
+
+  z-index: 5;
+
+}
