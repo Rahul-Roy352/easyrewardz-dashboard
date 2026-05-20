@@ -83,14 +83,43 @@ document.getElementById('viewTitle').innerHTML =
         const loc = r.view === 'home'
   ? 'Home'
   : r.view;
-        d.innerHTML = `
+//         d.innerHTML = `
+//   <button class="recent-del">✕</button>
+
+//   <a class="link" href="${escapeAttr(r.url)}" target="_blank" rel="noopener">
+//     ${escapeHtml(r.name)}
+//   </a>
+
+//   <div style="font-size:11px;opacity:0.7;margin-top:4px;">
+//     ${loc} · ${escapeHtml(r.cat||'')}
+//   </div>
+// `;
+d.innerHTML = `
   <button class="recent-del">✕</button>
 
-  <a class="link" href="${escapeAttr(r.url)}" target="_blank" rel="noopener">
+  <a
+    class="full-card-link recent-link"
+    href="${escapeAttr(r.url)}"
+    target="_blank"
+    rel="noopener"
+  >
     ${escapeHtml(r.name)}
   </a>
 
-  <div style="font-size:11px;opacity:0.7;margin-top:4px;">
+<div
+  style="
+    position:absolute;
+    bottom:14px;
+    line-height:1.4;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:12px;
+    opacity:0.75;
+    text-align:center;
+    width:100%;
+  "
+>
+
     ${loc} · ${escapeHtml(r.cat||'')}
   </div>
 `;
@@ -110,24 +139,24 @@ document.getElementById('viewTitle').innerHTML =
       content.appendChild(recSection);
     }
 
-    // Pinned section (only for country views per spec, but useful for home too)
-    const allLinks = [];
-    cats.forEach(c => bucket[c].forEach(l => allLinks.push({...l, _cat:c})));
-    const pinned = allLinks.filter(l => l.pinned && matches(l, search));
-    if(currentView !== 'home'){
-      const pinSection = document.createElement('div');
-      pinSection.className='category';
-      pinSection.innerHTML = `<div class="cat-header">📌 Pinned <span class="count">${pinned.length}</span></div>`;
-      const pinCards = document.createElement('div'); pinCards.className='cards';
-      if(pinned.length===0) pinCards.innerHTML='<div class="empty">No pinned links yet.</div>';
-      else pinned.forEach(l => pinCards.appendChild(makeCard(l, l._cat)));
-      pinSection.appendChild(pinCards);
-      content.appendChild(pinSection);
-    }
+    // // Pinned section (only for country views per spec, but useful for home too)
+    // const allLinks = [];
+    // cats.forEach(c => bucket[c].forEach(l => allLinks.push({...l, _cat:c})));
+    // const pinned = allLinks.filter(l => l.pinned && matches(l, search));
+    // if(currentView !== 'home'){
+    //   const pinSection = document.createElement('div');
+    //   pinSection.className='category';
+    //   pinSection.innerHTML = `<div class="cat-header">📌 Pinned <span class="count">${pinned.length}</span></div>`;
+    //   const pinCards = document.createElement('div'); pinCards.className='cards';
+    //   if(pinned.length===0) pinCards.innerHTML='<div class="empty">No pinned links yet.</div>';
+    //   else pinned.forEach(l => pinCards.appendChild(makeCard(l, l._cat)));
+    //   pinSection.appendChild(pinCards);
+    //   content.appendChild(pinSection);
+    // }
 
     cats.forEach(cat=>{
       const items = bucket[cat].filter(l => matches(l, search))
-        .sort((a,b)=> (b.pinned?1:0)-(a.pinned?1:0));
+        // .sort((a,b)=> (b.pinned?1:0)-(a.pinned?1:0));
       const section = document.createElement('div'); section.className='category';
       section.innerHTML = `<div class="cat-header">${catIcon(cat)} ${cat} <span class="count">${items.length}</span></div>`;
       const cards = document.createElement('div'); cards.className='cards';
@@ -147,7 +176,7 @@ document.getElementById('viewTitle').innerHTML =
 
   div.className = 'card' + (link.pinned ? ' pinned' : '');
 
-  div.innerHTML = `
+    div.innerHTML = `
     <a
       class="full-card-link"
       href="${escapeAttr(link.url)}"
