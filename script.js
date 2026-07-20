@@ -332,6 +332,13 @@ const STATIC_LINKS = {
           pinned: false
         },
 
+		  {
+          id: 'Unfraud001',
+          name: 'Unfraud Tracker',
+          url: 'https://l1nq.com/j464tby',
+          pinned: false
+        },
+
         {
           id: 's5',
           name: 'Coupon Setup Tracker(Bata India & HP)',
